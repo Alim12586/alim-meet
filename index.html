@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Alim Meet</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f3f3f3; text-align: center; }
+    .container { margin-top: 80px; background: #fff; padding: 40px; border-radius: 8px; display: inline-block; }
+    input, button { margin: 10px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: #4285f4; color: #fff; border: none; cursor: pointer; }
+    button:hover { background: #3367d6; }
+    h1 { color: #4285f4; }
+    #roomArea { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Alim Meet</h1>
+    <div id="roomArea">
+      <p>Toplantı odasına katılmak için oda adını girin:</p>
+      <input type="text" id="roomInput" placeholder="Oda adı">
+      <br>
+      <button onclick="joinRoom()">Odaya Katıl</button>
+      <button onclick="createRoom()">Toplantıyı Oluştur</button>
+    </div>
+    <div id="meetingArea" style="display:none;">
+      <h2>Odadayınız!</h2>
+      <p id="meetingInfo"></p>
+      <!-- Buraya WebRTC veya video chat kodu entegre edilebilir -->
+    </div>
+  </div>
+  <script>
+    function joinRoom() {
+      const room = document.getElementById('roomInput').value;
+      if (!room) {
+        alert('Lütfen oda adı girin!');
+        return;
+      }
+      showMeeting(room);
+    }
+
+    function createRoom() {
+      const room = 'alim-' + Math.random().toString(36).substring(2,8);
+      showMeeting(room);
+    }
+
+    function showMeeting(room) {
+      document.getElementById('roomArea').style.display = 'none';
+      document.getElementById('meetingArea').style.display = 'block';
+      document.getElementById('meetingInfo').innerText = `Oda adı: ${room}\nBu adı başka bir katılımcıya vererek birlikte katılabilirsiniz.`;
+      // Buraya WebRTC entegrasyonunu ekleyebilirsin.
+    }
+  </script>
+</body>
+</html>
